@@ -33,3 +33,15 @@ def user_by_id(request, id):
     if request.method == 'GET':
         serializer = UsersSerializer(users)
         return Response(serializer.data)
+
+
+@api_view(['POST'])
+def user_by_email(request):
+    email = request.data['email']
+
+    try:
+        users_id = Users.objects.get(email=email)
+        serializer = UsersSerializer(users_id)
+        return Response(serializer.data)
+    except Users.DoesNotExist:
+        Response(status=status.HTTP_404_NOT_FOUND)
