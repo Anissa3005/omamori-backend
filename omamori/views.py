@@ -63,3 +63,14 @@ def omamori_list(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         serializer.errors
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def omamori_by_userid(request, id):
+
+    try:
+        omamori = Omamori.objects.get(users_id=id)
+        serializer = OmamoriSerializer(omamori)
+        return Response(serializer.data)
+    except Omamori.DoesNotExist:
+        Response(status=status.HTTP_404_NOT_FOUND)
