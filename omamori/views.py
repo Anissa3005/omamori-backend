@@ -33,7 +33,7 @@ def user_by_id(request, id):
 
     if request.method == 'GET':
         serializer = UsersSerializer(users)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])

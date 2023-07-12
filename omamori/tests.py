@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.urls import reverse
 from .models import Users, Omamori
 
 
@@ -15,26 +16,45 @@ class UsersModelTest(TestCase):
 
 
 class OmamoriModelTest(TestCase):
+    def setUp(self):
+        # Create a user for testing
+        user = Users.objects.create(
+            id=1, username="test1", email="test1@example.com")
+
+        self.user_id = Users.objects.get(pk=1)
+
     def test_omamori_model_exists(self):
-        omamori = Users.objects.count()
+        omamori = Omamori.objects.count()
 
         self.assertEqual(omamori, 0)
 
-    # def test_model_has_string_representation(self):
-    #     omamori = Omamori.objects.create(
-    #         users_id=1, shrine_name="test shrine", location=[35.652832, 139.839478], description="test test test")
+    def test_model_has_string_representation(self):
+        omamori = Omamori.objects.create(
+            users_id=self.user_id, shrine_name="test shrine", location=[35.652832, 139.839478], description="test test test")
 
-    #     self.assertEqual(str(omamori), omamori.shrine_name)
+        self.assertEqual(str(omamori), omamori.shrine_name)
 
 
-class IndexPageTest(TestCase):
-    def test_create_new_user_return_correct_response(self):
+class UsersRequest(TestCase):
+    def setUp(self):
+        # Create a user for testing
+        Users.objects.create(
+            id=1, username="test1", email="test1@example.com")
+
+    def test_create_new_user_return_correct_status_code(self):
         response = self.client.post(
-            '/user/', {"username": "test1", "email": "test1@example.com"})
+            '/user/', {"username": "test2", "email": "test2@example.com"})
+        print(response)
 
         self.assertEqual(response.status_code, 201)
 
-    def test_get_users_return_correct_response(self):
+    def test_get_users_return_correct_status_code(self):
         response = self.client.get('/user/')
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_user_by_id_correct_status_code(self):
+        url = reverse('user-by-id', kwargs={'id': 1})
+        response = self.client.get(path=url)
 
         self.assertEqual(response.status_code, 200)
