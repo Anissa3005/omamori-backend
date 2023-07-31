@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'omamori',
     'corsheaders',
+    'django_filters',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
