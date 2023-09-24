@@ -4,6 +4,7 @@ from .serializers import UsersSerializer, OmamoriSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from .result import Errors
 from django_filters.rest_framework import DjangoFilterBackend
 
 
@@ -26,11 +27,12 @@ def users_list(request):
 
 @api_view(['GET'])
 def user_by_id(request, id):
-
     try:
         users = Users.objects.get(pk=id)
-    except Users.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+    except Exception as error:
+        print('ERROR:', error)
+        print('ID:', id)
+        return Errors.not_found_error('This user does not exist.')
 
     if request.method == 'GET':
         serializer = UsersSerializer(users)
