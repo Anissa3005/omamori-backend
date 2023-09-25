@@ -21,8 +21,11 @@ def users_list(request):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        serializer.errors
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        else:
+            print('SERIALIZER_ERROR', serializer.errors)
+            print('SERIALIZER', serializer)
+            print('REQUEST', request.data)
+            return Errors.bad_request('Could not create a user, make sure your inputs are correct')
 
 
 @api_view(['GET'])
