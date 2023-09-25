@@ -4,6 +4,8 @@ from .serializers import UsersSerializer, OmamoriSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from .result import Errors
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 @api_view(['GET', 'POST'])
@@ -19,20 +21,37 @@ def users_list(request):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        serializer.errors
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        else:
+            print('SERIALIZER_ERROR', serializer.errors)
+            print('SERIALIZER', serializer)
+            print('REQUEST', request.data)
+            return Errors.bad_request('Could not create a user, make sure your inputs are correct')
 
 
 @api_view(['GET'])
 def user_by_id(request, id):
-
     try:
         users = Users.objects.get(pk=id)
+    except Exception as error:
+        print('ERROR:', error)
+        print('ID:', id)
+        return Errors.not_found_error('This user does not exist.')
+
+    if request.method == 'GET':
+        serializer = UsersSerializer(users)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def user_by_username(request, username):
+
+    try:
+        user = Users.objects.get(username=username)
     except Users.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = UsersSerializer(users)
+        serializer = UsersSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
