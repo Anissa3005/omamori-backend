@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .result import Errors
-from django_filters.rest_framework import DjangoFilterBackend
+# from django_filters.rest_framework import DjangoFilterBackend
 
 
 @api_view(['GET', 'POST'])
@@ -25,7 +25,7 @@ def users_list(request):
             print('SERIALIZER_ERROR', serializer.errors)
             print('SERIALIZER', serializer)
             print('REQUEST', request.data)
-            return Errors.bad_request('Could not create a user, make sure your inputs are correct')
+            return Errors.bad_request('Could not create a user, make sure your inputs are')
 
 
 @api_view(['GET'])
