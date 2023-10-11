@@ -1,6 +1,6 @@
 from django.http import JsonResponse
-from .models import Users, Omamori
-from .serializers import UsersSerializer, OmamoriSerializer
+from .models import Users
+from .serializers import UsersSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -67,29 +67,29 @@ def user_by_email(request):
         Response(status=status.HTTP_404_NOT_FOUND)
 
 
-@api_view(['GET', 'POST'])
-def omamori_list(request):
+# @api_view(['GET', 'POST'])
+# def omamori_list(request):
 
-    if request.method == 'GET':
-        omamori = Omamori.objects.all()
-        serializer = OmamoriSerializer(omamori, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+#     if request.method == 'GET':
+#         omamori = Users.objects.all()
+#         serializer = UsersSerializer(omamori, many=True)
+#         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    if request.method == 'POST':
-        serializer = OmamoriSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        serializer.errors
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+#     if request.method == 'POST':
+#         serializer = UsersSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         serializer.errors
+#         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET'])
-def omamori_by_userid(request, id):
+# @api_view(['GET'])
+# def omamori_by_userid(request, id):
 
-    try:
-        omamori = Omamori.objects.get(users_id=id)
-        serializer = OmamoriSerializer(omamori)
-        return Response(serializer.data)
-    except Omamori.DoesNotExist:
-        Response(status=status.HTTP_404_NOT_FOUND)
+#     try:
+#         omamori = Omamori.objects.get(users_id=id)
+#         serializer = OmamoriSerializer(omamori)
+#         return Response(serializer.data)
+#     except Omamori.DoesNotExist:
+#         Response(status=status.HTTP_404_NOT_FOUND)

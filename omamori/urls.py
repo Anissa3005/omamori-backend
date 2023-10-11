@@ -24,7 +24,7 @@ urlpatterns = [
     path('user/<int:id>/', views.user_by_id, name='user-by-id'),
     path('user/email/', views.user_by_email),
     path('user/<str:username>/', views.user_by_username),
-    path('omamori/', views.omamori_list),
-    path('omamori/user/<int:id>/', views.omamori_by_userid,
-         name='omamori-by-user-id')
+    # path('omamori/', views.omamori_list),
+    # path('omamori/user/<int:id>/', views.omamori_by_userid,
+    #      name='omamori-by-user-id')
 ]
