@@ -13,3 +13,5 @@ sqlparse==0.4.4
 tzdata==2023.3
 virtualenv==20.23.0
 virtualenv-clone==0.5.7
+django-storages==1.14.2
+boto3==1.28.62
