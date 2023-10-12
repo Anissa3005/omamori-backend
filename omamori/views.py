@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.core.exceptions import ValidationError
 from .models import Users
 from .serializers import UsersSerializer
 from rest_framework.decorators import api_view
@@ -17,10 +18,14 @@ def users_list(request):
         return JsonResponse(serializer.data, safe=False)
 
     if request.method == 'POST':
+        print("POST request", request.data)
         serializer = UsersSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            try:
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            except ValidationError as e:
+                return Errors.bad_request('Could not create a user, make sure your inputs are')
         else:
             print('SERIALIZER_ERROR', serializer.errors)
             print('SERIALIZER', serializer)
