@@ -4,10 +4,12 @@ import uuid
 
 
 class Users(models.Model):
-    username = models.CharField(max_length=30, unique=True)
-    uuid = models.UUIDField(editable=False)
+    username = models.CharField(max_length=30)
+    uuid = models.UUIDField(
+        default=uuid.uuid4, primary_key=True, editable=False, unique=True)
     shrine_name = models.CharField(max_length=20)
-    location = ArrayField(models.CharField(max_length=200), size=2)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6)
     description = models.CharField(max_length=300, blank=True)
     omamori_picture = models.FileField(upload_to='media/')
     created_at = models.DateTimeField(auto_now_add=True)
