@@ -21,10 +21,5 @@ from omamori import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', views.users_list, name='user'),
-    path('user/<int:id>/', views.user_by_id, name='user-by-id'),
-    path('user/email/', views.user_by_email),
-    path('user/<str:username>/', views.user_by_username),
-    # path('omamori/', views.omamori_list),
-    # path('omamori/user/<int:id>/', views.omamori_by_userid,
-    #      name='omamori-by-user-id')
+    path('user/<str:uuid>/', views.user_by_uuid, name='user-by-uuid'),
 ]
