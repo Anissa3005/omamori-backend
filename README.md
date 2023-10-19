@@ -1,2 +1,7 @@
-# omamori-backend
-This repository is redo of my repository of omamori
+# Omamori Finder - Server
+
+## About
+
+## Prerequisites
+
+## Set Up
