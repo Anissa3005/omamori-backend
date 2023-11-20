@@ -2,6 +2,7 @@ PY = python3
 VENV = venv
 BIN=$(VENV)/bin
 ACTIVATE = $(BIN)/activate
+ACTIVATE_CMD = . $(ACTIVATE)
 
 # make it work on windows too
 ifeq ($(OS), Windows_NT)
@@ -9,9 +10,6 @@ ifeq ($(OS), Windows_NT)
 	ACTIVATE = $(BIN)/activate
 	PY=python
 	ACTIVATE_CMD = call $(ACTIVATE)
-else
-	# For Unix-like systems
-	ACTIVATE_CMD = . $(ACTIVATE)
 endif
 
 $(VENV): requirements.txt
@@ -20,6 +18,6 @@ $(VENV): requirements.txt
 
 .PHONY: test
 test: $(VENV)
-	@echo "Running tests"
+	@echo 🧪 Running tests... 🧪
 	@$(ACTIVATE_CMD) && $(PY) manage.py test
 
