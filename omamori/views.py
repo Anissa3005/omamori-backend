@@ -18,17 +18,15 @@ def users_list(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     if request.method == 'POST':
-        print("POST request", request.data)
         serializer = UsersSerializer(data=request.data)
         if serializer.is_valid():
             try:
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             except ValidationError as e:
-                return Errors.bad_request('Could not create a user, make sure your inputs are')
+                return Errors.bad_request(e)
         else:
             print('SERIALIZER_ERROR', serializer.errors)
-            print('SERIALIZER', serializer)
             print('REQUEST', request.data)
             return Errors.bad_request('Could not create a user, make sure your inputs are')
 
