@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Users, Omamori
 import re
+from .result import Error
 
 
 class UsersSerializer(serializers.ModelSerializer):
@@ -15,13 +16,14 @@ class UsersSerializer(serializers.ModelSerializer):
         contains_invalid_alphabet = re.search(regex_non_latin, value)
 
         if contains_invalid_character != None:
-            raise serializers.ValidationError('INVALID_CHARACTERS')
+            raise serializers.ValidationError(Error.INVALID_CHARACTERS)
 
         if contains_invalid_alphabet != None:
-            raise serializers.ValidationError('CONTAINS_NON_LATIN_CHARACTERS')
+            raise serializers.ValidationError(
+                Error.CONTAINS_NON_LATIN_CHARACTERS)
 
         if len(value.replace(" ", "")) <= 1:
-            raise serializers.ValidationError('INVALID_LENGTH')
+            raise serializers.ValidationError(Error.INVALID_LENGTH)
         return value
 
 

@@ -1,6 +1,13 @@
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
+from enum import Enum
+
+
+class Error(Enum):
+    INVALID_CHARACTERS = 'SINVALID_CHARACTERS'
+    CONTAINS_NON_LATIN_CHARACTERS = 'CONTAINS_NON_LATIN_CHARACTERS'
+    INVALID_LENGTH = 'INVALID_LENGTH'
 
 
 class Errors:
