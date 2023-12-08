@@ -11,6 +11,7 @@ from .result import Errors
 
 @api_view(['GET', 'POST'])
 def users_list(request):
+    print('REQUEST', request.data)
 
     if request.method == 'GET':
         users = Users.objects.all()
@@ -27,7 +28,6 @@ def users_list(request):
                 return Errors.bad_request(e)
         else:
             print('SERIALIZER_ERROR', serializer.errors)
-            print('REQUEST', request.data)
             return Errors.bad_request('Could not create a user, make sure your inputs are')
 
 

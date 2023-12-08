@@ -1,17 +1,12 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
-import uuid
 
 
 class Users(models.Model):
-    username = models.CharField(max_length=30)
-    uuid = models.UUIDField(
-        default=uuid.uuid4, primary_key=True, editable=False, unique=True)
+    uuid = models.CharField(
+        primary_key=True, unique=True, max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.username
 
 
 class Omamori(models.Model):
