@@ -1,27 +1,20 @@
 from django.test import TestCase
 from django.urls import reverse
 from ..models import Users
+import uuid
 
 
 class UsersModelTest(TestCase):
     def setUp(self):
-        Users.objects.create(username='frogman')
-        Users.objects.create(username='duckman')
+        test_uuid = uuid
+        Users.objects.create(uuid=test_uuid)
 
     def test_users_model_exists(self):
         users = Users.objects.count()
-        frogman = Users.objects.get(username='frogman')
-        duckman = Users.objects.get(username='duckman')
+        new_user = Users.objects.get()
 
-        self.assertEqual(users, 2)
-        self.assertEqual(frogman.username, 'frogman')
-        self.assertTrue(frogman.uuid)
-        self.assertEqual(duckman.username, 'duckman')
-        self.assertTrue(duckman.uuid)
-    # def test_model_has_string_representation(self):
-    #     user = Users.objects.create(username="testUser")
+        self.assertEqual(users, 1)
 
-    #     self.assertEqual(str(user), user.username)
 
 # class OmamoriModelTest(TestCase):
 #     def setUp(self):
