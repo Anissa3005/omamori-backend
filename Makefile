@@ -14,7 +14,7 @@ endif
 
 $(VENV): requirements.txt
 	$(PY) -m venv $(VENV)
-	$(BIN)/pip install --upgrade -r requirements.txt
+	$(BIN)/pip install -r requirements.txt
 
 .PHONY: test runserver
 test: $(VENV)
