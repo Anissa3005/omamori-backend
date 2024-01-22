@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import Users, Omamori
 import re
-from .result import Error
+from omamori.results import Error
 
 
 class UsersSerializer(serializers.ModelSerializer):

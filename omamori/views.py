@@ -5,8 +5,13 @@ from .serializers import UsersSerializer, OmamoriSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .result import Errors
+from omamori.results import Errors
 # from django_filters.rest_framework import DjangoFilterBackend
+
+
+@api_view(['GET'])
+def index(request):
+    return Response({"index"}, status=status.HTTP_200_OK)
 
 
 @api_view(['GET', 'POST'])

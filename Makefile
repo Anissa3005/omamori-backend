@@ -21,7 +21,7 @@ test: $(VENV)
 	@echo 🧪 Running tests... 🧪
 	@$(ACTIVATE_CMD) && $(PY) manage.py test
 
-runserver: $(VENV)
+runserver:
 	@echo 🚀 Starting server... 🚀
-	@$(ACTIVATE_CMD) && $(PY) manage.py runserver
+	$(PY) manage.py runserver
 
