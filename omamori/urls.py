@@ -4,7 +4,7 @@ from omamori import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('user/', views.users_list, name='user'),
-    path('user/<str:uuid>/', views.user_by_uuid, name='user-by-uuid'),
-    # path('omamori/', views.omamori_list, name='omamori')
+    path('user/', views.users_list, name='users'),
+    path('user/<str:uuid>/', views.user_by_uuid, name='user_by_uuid'),
+    path('omamori/', views.omamori_list, name='omamori')
 ]
