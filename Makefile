@@ -16,12 +16,21 @@ $(VENV): requirements.txt
 	$(PY) -m venv $(VENV)
 	$(BIN)/pip install --upgrade -r requirements.txt
 
-.PHONY: test runserver
-test: $(VENV)
-	@echo 🧪 Running tests... 🧪
-	@$(ACTIVATE_CMD) && $(PY) manage.py test
+.PHONY: createvenv install test runserver
 
-runserver: $(VENV)
+createvenv:
+	@echo 📁 Creating venv file...
+	$(PY) -m venv $(VENV)
+
+install:
+	@echo ⚙️ Install packages...
+	pip install -r requirements.txt
+
+test: 
+	@echo 🧪 Running tests... 🧪
+	$(PY) manage.py test
+
+runserver:
 	@echo 🚀 Starting server... 🚀
-	@$(ACTIVATE_CMD) && $(PY) manage.py runserver
+	$(PY) manage.py runserver
 

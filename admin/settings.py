@@ -40,7 +40,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'rest_framework',
-    'omamori',
+    'omamori.apps.OmamoriConfig',
     'corsheaders',
     'django_filters',
     'django.contrib.admin',
@@ -68,7 +68,7 @@ REST_FRAMEWORK = {'DEFAULT_PERMISSION_CLASSES': [
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-ROOT_URLCONF = 'omamori.urls'
+ROOT_URLCONF = 'admin.urls'
 
 TEMPLATES = [
     {
@@ -86,7 +86,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'omamori.wsgi.application'
+WSGI_APPLICATION = 'admin.wsgi.application'
 
 
 # Database
