@@ -26,11 +26,8 @@ def users_list(request):
     if request.method == 'POST':
         serializer = UsersSerializer(data=request.data)
         if serializer.is_valid():
-            try:
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            except ValidationError as e:
-                return Errors.bad_request(e)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             print('SERIALIZER_ERROR', serializer.errors)
             return Errors.bad_request('Could not create a user, make sure your inputs are')
@@ -61,13 +58,11 @@ def omamori_list(request):
     if request.method == 'POST':
         serializer = OmamoriSerializer(data=request.data)
         if serializer.is_valid():
-            try:
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            except ValidationError as e:
-                return Errors.bad_request('Could not create a user, make sure your inputs are correct')
+            serializer.save()
+            # TO DO: Should only return id
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             print('SERIALIZER_ERROR', serializer.errors)
             print('SERIALIZER', serializer)
             print('REQUEST', request.data)
-            return Errors.bad_request('Could not create a user, make sure your inputs correct')
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

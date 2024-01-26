@@ -6,5 +6,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('user/', views.users_list, name='users'),
     path('user/<str:uuid>/', views.user_by_uuid, name='user_by_uuid'),
-    path('omamori/', views.omamori_list, name='omamori')
+    path('upload/', views.omamori_list, name='omamori')
 ]
