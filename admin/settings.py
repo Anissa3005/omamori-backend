@@ -41,9 +41,10 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'rest_framework',
     'omamori.apps.OmamoriConfig',
+    'users.apps.UsersConfig',
     'corsheaders',
     'django_filters',
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -118,6 +119,8 @@ else:
             'PORT': env('PORT'),
         }
     }
+
+AUTH_USER_MODEL = "users.User"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

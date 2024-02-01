@@ -1,18 +1,18 @@
 from rest_framework import serializers
-from .models import Users, Omamori
+from .models import Omamori
 import re
 from omamori.results import Error
 
 
-class UsersSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Users
-        fields = ['uuid']
+# class UsersSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Users
+#         fields = ['uuid']
 
-    def validate_uuid(self, value):
-        if len(value.replace(" ", "")) <= 1:
-            raise serializers.ValidationError(Error.INVALID_LENGTH)
-        return value
+#     def validate_uuid(self, value):
+#         if len(value.replace(" ", "")) <= 1:
+#             raise serializers.ValidationError(Error.INVALID_LENGTH)
+#         return value
 
 
 class OmamoriSerializer(serializers.ModelSerializer):
