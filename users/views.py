@@ -5,6 +5,7 @@ from rest_framework import status
 
 from users.serializers import UserSerializer
 from users.models import User
+from .auth import create_token
 
 
 @api_view(['POST'])
@@ -32,4 +33,14 @@ def login(request):
     if not user.check_password(password):
         raise AuthenticationFailed('Password is incorect')
 
-    return Response(username)
+    token = create_token(user=user)
+
+    response = Response()
+
+    response.set_cookie(key='jwt', value=token, httponly=True)
+
+    response.data = {
+        'jwt': token
+    }
+
+    return response
