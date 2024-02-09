@@ -1,9 +1,12 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework import status
 
+
 from users.serializers import UserSerializer
+from users.premissions import VerifyUser
 from users.models import User
 from .auth import create_token
 
@@ -21,6 +24,7 @@ def create_user(request):
 
 
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def login(request):
     username = request.data['username']
     password = request.data['password']
@@ -44,3 +48,10 @@ def login(request):
     }
 
     return response
+
+
+# Used as testing authentication using premissions
+# @api_view(['GET'])
+# @permission_classes([VerifyUser])
+# def id_user(request):
+#     return Response('Authenticated', status=status.HTTP_200_OK)

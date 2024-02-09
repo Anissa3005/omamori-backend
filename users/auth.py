@@ -1,4 +1,3 @@
-import secrets
 import jwt
 import datetime
 import os
@@ -10,8 +9,7 @@ load_dotenv()
 
 
 def create_token(user):
-    # first we need to create our payload, with user data and experation date.
-    # calculate the experation date, from the time the token is created the time token will be expiered
+    print("Creating token 🏗️")
     payload = {
         'id': user.id,
         'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=15),
