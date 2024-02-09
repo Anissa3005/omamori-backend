@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from tkinter.tix import Tree
 import environ
 import os
 
@@ -63,11 +64,10 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware'
 ]
 
-REST_FRAMEWORK = {'DEFAULT_PERMISSION_CLASSES': [
-    'rest_framework.permissions.AllowAny',
-]}
-
-CORS_ORIGIN_ALLOW_ALL = True
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]}
 
 ROOT_URLCONF = 'admin.urls'
 
@@ -174,3 +174,7 @@ AWS_S3_CUSTOM_DOMAIN = env('AWS_S3_CUSTOM_DOMAIN')
 AWS_CLOUDFRONT_KEY_ID = env.str('AWS_CLOUDFRONT_KEY_ID').strip()
 AWS_CLOUDFRONT_KEY = env.str('AWS_CLOUDFRONT_KEY',
                              multiline=True).encode('ascii').strip()
+
+# CORS
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
