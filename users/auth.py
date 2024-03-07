@@ -1,7 +1,6 @@
 import jwt
 import datetime
 import os
-import environ
 
 from dotenv import load_dotenv
 
