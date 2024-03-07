@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework import status
 
+
 from users.serializers import UserSerializer
 from users.premissions import VerifyUser
 from users.models import User
@@ -46,6 +47,7 @@ def login(request):
         'jwt': token
     }
 
+
     response.status = status.HTTP_202_ACCEPTED
 
     return response
@@ -65,3 +67,7 @@ def logout(request):
     response.status = status.HTTP_202_ACCEPTED
 
     return response
+
+    return response
+
+
