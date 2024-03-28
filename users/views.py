@@ -12,6 +12,7 @@ from .auth import create_token
 
 
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def create_user(request):
 
     if request.method == 'POST':
@@ -47,8 +48,7 @@ def login(request):
         'jwt': token
     }
 
-
-    response.status = status.HTTP_202_ACCEPTED
+    response.status_code = status.HTTP_202_ACCEPTED
 
     return response
 
@@ -64,10 +64,6 @@ def logout(request):
         'message': 'Logout succesful'
     }
 
-    response.status = status.HTTP_202_ACCEPTED
+    response.status_code = status.HTTP_202_ACCEPTED
 
     return response
-
-    return response
-
-

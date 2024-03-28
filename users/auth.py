@@ -11,8 +11,8 @@ def create_token(user):
     print("Creating token 🏗️")
     payload = {
         'id': user.id,
-        'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=15),
-        'iat': datetime.datetime.utcnow()
+        'exp': datetime.datetime.now(datetime.UTC) + datetime.timedelta(minutes=15),
+        'iat': datetime.datetime.now(datetime.UTC)
     }
 
     secret_key = os.environ["SECRET_KEY"]

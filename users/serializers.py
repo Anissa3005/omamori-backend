@@ -5,8 +5,9 @@ from .models import User
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'password']
-        extra_kwargs = {'password': {'write_only': True}}
+        fields = ['id', 'username', 'password']
+        extra_kwargs = {'password': {'write_only': True},
+                        'username': {'write_only': True}}
 
     # Make sure that the password is salted and hashed before when .saving() is called
     def create(self, validated_data):
