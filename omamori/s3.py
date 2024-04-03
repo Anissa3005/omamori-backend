@@ -3,12 +3,20 @@ import logging
 
 from botocore.exceptions import ClientError
 
-# s3 = boto3.client('s3')
 
-# my_object = s3.list_objects_v2(Bucket='omamori-finder-images')
+def get_all_images():
+    s3 = boto3.client('s3')
+    bucket = 'omamori-finder-images'
 
-# for object in my_object['Contents']:
-#     print(object['Key'])
+    my_objects = s3.list_objects_v2(Bucket='omamori-finder-images')
+
+    presigned_urls = []
+
+    for object in my_objects['Contents']:
+        presigned_urls.append(create_presigned_url(
+            bucket_name=bucket, object_name=object['Key']))
+
+    return presigned_urls
 
 
 def create_presigned_url(bucket_name, object_name, expiration=3600):
@@ -35,5 +43,4 @@ def create_presigned_url(bucket_name, object_name, expiration=3600):
     return response
 
 
-print(create_presigned_url(bucket_name='omamori-finder-images',
-                           object_name='media/study_omamori.jpg'))
+print(get_all_images())
